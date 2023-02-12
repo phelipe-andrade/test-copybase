@@ -99,7 +99,7 @@ a {
 
 .v-enter-from {
   top: 100% !important;
-  left: 50%;
+  left: 50% !important;
   transform: translate3d(-50%, 0%, 0) !important;
 }
 
@@ -111,11 +111,12 @@ a {
 
 .v-leave-to {
   top: 50%;
-  transform: translate3d(0, -50%, 0);
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.5s;
+  transition: all 0.4s;
 }
 </style>

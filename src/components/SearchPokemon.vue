@@ -34,7 +34,8 @@ export default {
   },
   methods: {
     fetchPokemon() {
-      this.$router.push({ query: { q: this.search } });
+      this.$router.push({ query: { q: this.search.toLocaleLowerCase() } });
+      this.search = "";
     },
   },
 };
