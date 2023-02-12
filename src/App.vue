@@ -64,10 +64,12 @@ a {
 }
 
 #main {
-  width: 1025px;
+  width: 995px;
   flex: 1;
   text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .btn {
@@ -97,26 +99,31 @@ a {
   opacity: 0;
 }
 
-.v-enter-from {
-  top: 100% !important;
-  left: 50% !important;
-  transform: translate3d(-50%, 0%, 0) !important;
-}
-
 .v-enter-to {
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-}
-
-.v-leave-to {
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  opacity: 1;
 }
 
 .v-enter-active,
 .v-leave-active {
   transition: all 0.4s;
+}
+
+@media screen and (max-width: 1025px) {
+  #main {
+    width: 739px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #main {
+    width: 450px;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #main {
+    width: 330px;
+  }
 }
 </style>

@@ -3,17 +3,20 @@
     <h1>Procure o Pokemon pelo nome:</h1>
     <SearchPokemon />
   </div>
-  <transition mode="out-in">
-    <div class="content">
-      <div v-if="!loading">
+
+  <div class="content">
+    <transition mode="out-in">
+      <template v-if="!loading">
         <PokemonDetails :pokemon="data" v-if="data && data.id" />
-        <p v-else-if="error">{{ url }} não encontrado.</p>
-      </div>
+        <p v-else-if="error" class="error">
+          <span>{{ this.$route.query.q }}</span> não encontrado.
+        </p>
+      </template>
       <div v-else key="loading">
         <PageLoading />
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -50,7 +53,6 @@ export default {
         .get(this.url)
         .then((r) => {
           this.data = r.data;
-          console.log(r.data);
         })
         .catch(() => (this.error = true))
         .finally(() => {
@@ -64,7 +66,7 @@ export default {
     },
   },
   created() {
-    this.getPokemons();
+    if (this.$route.query.q) this.getPokemons();
   },
 };
 </script>
@@ -75,10 +77,16 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
+  width: 100%;
 }
 
 .wrapper.active {
   animation: fade 0.5s forwards;
+}
+
+.error span {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 @keyframes fade {
@@ -88,7 +96,7 @@ export default {
   }
   to {
     top: 5%;
-    transform: translate3d(-50%, -5%, 0);
+    transform: translate3d(-50%, -15%, 0);
   }
 }
 
@@ -97,11 +105,32 @@ h1 {
 }
 
 .content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  /* background: red; */
   width: 100%;
+  margin: 140px 0px 30px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    position: initial;
+    top: 0;
+    left: 0;
+    transform: translate3d(0, 0, 0);
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .wrapper.active {
+    animation: none;
+  }
+
+  .content {
+    margin-top: 0px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.125rem;
+  }
 }
 </style>

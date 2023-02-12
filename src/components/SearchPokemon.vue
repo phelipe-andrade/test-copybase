@@ -45,7 +45,7 @@ export default {
 form {
   max-width: 400px;
   margin: 15px auto 60px auto;
-  position: relative;
+  display: flex;
 }
 
 #search {
@@ -56,10 +56,8 @@ form {
 }
 
 button {
-  position: absolute;
-  right: 0;
   width: 50px;
-  height: 100%;
+  height: 47px;
   background: none;
   border: 1px solid #201e1e;
   cursor: pointer;
